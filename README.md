@@ -80,6 +80,11 @@ approval.
 
 If you only read a few things:
 
+- **[`DEMO-VIDEO.md`](DEMO-VIDEO.md)** — a three-minute walkthrough, verified by running the whole
+  stack rather than written from the spec: every number in it came out of the app. It ends with a
+  table of what was measured and then a list of what is **not** presentable and why, which is the
+  most honest thing in this repository.
+
 - **[`Incident-tracker-ui/README.md`](Incident-tracker-ui/README.md)** — the screens, and for each
   one why it is drawn the way it is. The parts worth reading explain a defect that was fixed rather
   than a feature that was added: why the funnel's bars encode share of received rather than
