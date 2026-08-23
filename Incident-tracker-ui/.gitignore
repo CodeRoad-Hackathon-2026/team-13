@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.yarn/cache/
+.yarn/install-state.gz
+
+# Build output
+dist/
+build/
+.vite/
+*.tsbuildinfo
+
+# Test / coverage artifacts
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
+# Environment — NEVER commit real values (constitution XIII: no secrets in source)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Caches
+.cache/
+.eslintcache
+.stylelintcache
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+.vscode/
+.idea/
+
+# Claude Code — machine-local only. The shared config is committed (see note below).
+.claude/settings.local.json
+.claude/*.local.json
+
+# --------------------------------------------------------------------------
+# Deliberately NOT ignored — these are the project, not local scratch:
+#   .specify/            Spec Kit scaffolding + .specify/memory/constitution.md
+#                        (v1.0.0, ratified — governs every spec/plan/task)
+#   .claude/skills/      the /speckit.* commands that drive the workflow
+#   CLAUDE.md            runtime guidance the constitution requires be kept in sync
+#   specs/               spec.md / plan.md / tasks.md per feature (traceability, II)
+#   docs/                the PRD and the prototype wireframe
+#   package-lock.json    (or the chosen package manager's lockfile) — reproducible installs
+# --------------------------------------------------------------------------

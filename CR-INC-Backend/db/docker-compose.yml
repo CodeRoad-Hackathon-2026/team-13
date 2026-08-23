@@ -1,0 +1,27 @@
+# Local PostgreSQL with pgvector preinstalled.
+#   docker compose -f db/docker-compose.yml up -d
+#   ./db/migrate.sh --seed
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: cr-inc-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: incident
+      POSTGRES_PASSWORD: incident
+      POSTGRES_DB: incident_response
+    # Host port is overridable so this stack coexists with other local Postgres
+    # instances, matching how RAG Core's compose does it. Only the host side
+    # moves — DATABASE_URL in db/.env must agree.
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U incident -d incident_response"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:

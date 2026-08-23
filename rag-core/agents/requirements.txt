@@ -1,0 +1,6 @@
+# Kept separate from the service's requirements.txt on purpose: CrewAI pulls a
+# large dependency tree (litellm, chromadb, embedchain) that has no business in
+# the API or worker image. The crew is a consumer, installed where it runs.
+crewai==0.95.0
+httpx==0.28.1
+pydantic==2.10.4

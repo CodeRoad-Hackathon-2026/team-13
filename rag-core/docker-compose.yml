@@ -1,0 +1,87 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: rag
+      POSTGRES_PASSWORD: rag
+      POSTGRES_DB: rag
+    # Host ports are overridable so this stack coexists with other local
+    # Postgres/Redis instances. Containers reach each other by service name,
+    # so these mappings only matter for tools on the host (psql, redis-cli).
+    ports:
+      - "${POSTGRES_PORT:-55432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rag -d rag"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "${REDIS_PORT:-56379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://rag:rag@postgres:5432/rag
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - .:/srv
+      # Mount a host directory here to feed it with a `filesystem` source.
+      - ./data:/data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build: .
+    # watchfiles gives the worker the same hot-reload the API gets from
+    # uvicorn --reload; without it, code changes silently keep running the old
+    # job handlers. Drop the wrapper in production.
+    command: watchfiles --filter python "arq app.worker.WorkerSettings" /srv/app
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://rag:rag@postgres:5432/rag
+      REDIS_URL: redis://redis:6379/0
+    volumes:
+      - .:/srv
+      - ./data:/data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Hot-reload dev server. Not needed to use the app: the API serves the built
+  # bundle at :8000. Start it with `docker compose --profile dev up frontend`.
+  frontend:
+    image: node:22-alpine
+    profiles: ["dev"]
+    working_dir: /ui
+    command: sh -c "npm install --no-audit --no-fund && npm run dev"
+    environment:
+      VITE_API_TARGET: http://api:8000
+    ports:
+      - "${UI_PORT:-5173}:5173"
+    volumes:
+      - ./frontend:/ui
+      - /ui/node_modules
+    depends_on:
+      - api
+
+volumes:
+  pgdata:

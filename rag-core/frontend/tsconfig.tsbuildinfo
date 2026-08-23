@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/api/client.ts","./src/api/stream.ts","./src/api/types.ts","./src/components/connectorform.tsx","./src/components/sourcecard.tsx","./src/components/common.tsx","./src/screens/ask.tsx","./src/screens/corpus.tsx","./src/screens/metrics.tsx","./src/screens/search.tsx","./src/screens/setup.tsx"],"version":"5.9.3"}

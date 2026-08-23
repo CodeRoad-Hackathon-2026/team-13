@@ -1,0 +1,12 @@
+.git
+.venv
+venv
+__pycache__
+.pytest_cache
+*.pyc
+.env
+data
+docs
+# The ui stage builds these from source; never copy host artifacts.
+frontend/node_modules
+frontend/dist

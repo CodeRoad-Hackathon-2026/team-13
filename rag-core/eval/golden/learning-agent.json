@@ -1,0 +1,139 @@
+{
+  "name": "learning-agent-v1",
+  "description": "Golden questions for the ISC-UPB/Learning-Agent corpus (33 Markdown and Prisma SQL documents in the `code` collection). Questions are in English while the documents are Spanish — deliberately, because each one carries an exact identifier from the source (learning-agent, stop-forward, DocumentStatus, pg_isready) and those tokens are language-neutral, so the lexical branch still contributes. Every must_mention value was verified to appear literally in the named document before this file was written.",
+  "cases": [
+    {
+      "id": "k8s-namespace",
+      "query": "Which Kubernetes namespace do the Learning Agent services run in?",
+      "relevant": ["infra/k8s/README.md"],
+      "collections": ["code"],
+      "must_mention": ["learning-agent"],
+      "note": "The trap is one character. The namespace is `learning-agent` with a hyphen; the database is `learning_agent` with an underscore, and both appear in this same document. Paste the wrong one into kubectl and you get an empty result rather than an error."
+    },
+    {
+      "id": "deploy-script-stop",
+      "query": "How do I stop the port-forwards that the deploy script started?",
+      "relevant": ["infra/k8s/README.md"],
+      "collections": ["code"],
+      "must_mention": ["stop-forward"],
+      "note": "The subcommand is `stop-forward`, not the `stop-port-forward` anyone would guess. A paraphrase is worthless here — this is a string the operator types."
+    },
+    {
+      "id": "minio-console-port",
+      "query": "What port and credentials open the MinIO console?",
+      "relevant": ["infra/k8s/README.md"],
+      "collections": ["code"],
+      "must_mention": ["9090", "adminminio"],
+      "note": "MinIO's own default console port is 9001. This deployment uses 9090, so a model leaning on general knowledge instead of the passage gets it wrong in a way that looks confident."
+    },
+    {
+      "id": "docs-endpoint-defaults",
+      "query": "What are the default page and limit when listing the documents of a subject?",
+      "relevant": [
+        "backend/CONTRACT_ENDPOINTS_DOCUMENTATION.md",
+        "backend/POSTMAN_TESTING_GUIDE.md"
+      ],
+      "relevant_any": true,
+      "collections": ["code"],
+      "must_mention": ["page", "limit", "10"],
+      "note": "Two documents state the same defaults (page 1, limit 10). Either one answers the question, hence relevant_any."
+    },
+    {
+      "id": "rbac-tables",
+      "query": "Which tables does the RBAC migration create?",
+      "relevant": [
+        "backend/prisma/migrations/20250813050453_init_rbac/migration.sql",
+        "backend/prisma/migrations/20250814033647_init_rbac/migration.sql"
+      ],
+      "relevant_any": true,
+      "collections": ["code"],
+      "must_mention": ["Role", "Permission", "UserRole", "RolePermission"],
+      "note": "Two near-identical init_rbac migrations exist. Demanding both would score a correct answer as a miss, which is what relevant_any is for. Also exercises the SQL chunker, which splits on statement boundaries rather than token windows."
+    },
+    {
+      "id": "document-status-enum",
+      "query": "What values can the DocumentStatus enum take?",
+      "relevant": [
+        "backend/prisma/migrations/20250824231010_repository_documents/migration.sql"
+      ],
+      "collections": ["code"],
+      "must_mention": ["UPLOADED", "PROCESSING", "PROCESSED", "ERROR", "DELETED"],
+      "note": "Five values that must all survive. A summary that says 'various processing states' is grounded, cited, and useless."
+    },
+    {
+      "id": "pods-pending",
+      "query": "Pods are stuck in Pending state. What should I check?",
+      "relevant": ["infra/k8s/README.md"],
+      "collections": ["code"],
+      "must_mention": ["kubectl describe pod", "learning-agent"],
+      "note": "Incident-shaped. The document answers this twice — once in a Spanish OS-specific section and once in an English Common Issues list — with different surrounding advice, so retrieval has to pick without the two cancelling out."
+    },
+    {
+      "id": "images-not-found",
+      "query": "Minikube cannot find the learning-agent images. How do I fix it?",
+      "relevant": ["infra/k8s/README.md"],
+      "collections": ["code"],
+      "must_mention": ["minikube docker-env"],
+      "note": "The fix is pointing the shell at Minikube's Docker daemon. Nothing else in the answer matters if that command is lost."
+    },
+    {
+      "id": "backend-db-connection",
+      "query": "The backend cannot connect to PostgreSQL in the cluster. How do I diagnose it?",
+      "relevant": ["infra/k8s/README.md"],
+      "collections": ["code"],
+      "must_mention": ["pg_isready", "app_user"],
+      "note": "Requires both the readiness command and the database user it takes."
+    },
+    {
+      "id": "conflict-postgres-password",
+      "query": "What password does the app_user account use for PostgreSQL?",
+      "relevant": ["Como-levantar-el-proyecto.md", "infra/k8s/README.md"],
+      "collections": ["code"],
+      "must_mention": ["app_pa", "secure_"],
+      "min_citations": 2,
+      "note": "The documents genuinely disagree: one password for local Docker Compose, another for Kubernetes. The correct behaviour is to report both and say which context each belongs to. Picking one silently is the failure being tested, and min_citations catches an answer that names both values while citing only one source. The expected values are truncated to distinguishing prefixes so this repository does not carry credentials copied out of another one — substring matching means the assertion still holds against the full strings."
+    },
+    {
+      "id": "conflict-pgvector-image",
+      "query": "Which pgvector image tag does this project use for PostgreSQL?",
+      "relevant": ["infra/k8s/README.md", "infra/README.md"],
+      "collections": ["code"],
+      "must_mention": ["pg16", "pg15"],
+      "min_citations": 2,
+      "note": "pg16 in the Kubernetes manifests, pg15 in the infra migration guide. Two distinguishable strings, unlike `npm run start` and `npm run start:dev` where the first is a substring of the second and the assertion would be unscoreable."
+    },
+    {
+      "id": "conflict-port-3000",
+      "query": "What service runs on port 3000 in this project?",
+      "relevant": ["Como-levantar-el-proyecto.md", "client/README.md"],
+      "collections": ["code"],
+      "must_mention": ["backend", "json-server"],
+      "min_citations": 2,
+      "note": "Every document says port 3000 is the NestJS backend except client/README.md, which says it is json-server serving db.json. That README appears to belong to a different application ('Grade Visualizer') and never mentions NestJS. The RAG surfacing the contradiction is more useful than either answer alone."
+    },
+    {
+      "id": "oov-ingress-host",
+      "query": "What host is configured on the Ingress for this deployment?",
+      "relevant": [],
+      "collections": ["code"],
+      "should_abstain": true,
+      "note": "The hardest abstention case in the set. The word `ingress` DOES appear — named once as an alternative to port-forwarding — so retrieval returns a strong lexical match and confidence stays high. No manifest, host or command exists anywhere. This is precisely where a RAG without a calibrated gate invents a hostname."
+    },
+    {
+      "id": "oov-k8s-rollback",
+      "query": "How do I roll back a bad deployment in the Kubernetes cluster?",
+      "relevant": [],
+      "collections": ["code"],
+      "should_abstain": true,
+      "note": "`kubectl rollout restart` and `rollout status` are documented, which look adjacent enough to tempt an extrapolation to `rollout undo` — a command that appears nowhere in the corpus. Scoped to `code` on purpose: the seeded runbooks DO contain a rollback procedure, so this also checks that collection scoping keeps the two corpora apart."
+    },
+    {
+      "id": "oov-resource-limits",
+      "query": "What CPU and memory limits are set on the backend pods?",
+      "relevant": [],
+      "collections": ["code"],
+      "should_abstain": true,
+      "note": "The troubleshooting section says to check resource constraints, so the topic is teased without a single number being given. Verified absent corpus-wide: no `resources:` block, no requests, no limits."
+    }
+  ]
+}

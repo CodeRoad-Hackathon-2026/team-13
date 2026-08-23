@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1106" viewBox="0 0 1440 1106" role="img" aria-label="Inventory of the incident response agents, tools, data sources and the people who approve their work">
+<rect x="0" y="0" width="1440" height="1106" fill="#ffffff"/>
+<text x="28.0" y="46.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="30" fill="#1a4f7a" font-weight="bold">Team of Agents and Humans</text>
+<text x="28.0" y="72.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="14.5" fill="#5b6673" font-style="italic">Agents do the retrieval — people make every decision that leaves the database</text>
+<rect x="28.0" y="86.0" width="1384.0" height="3.0" rx="1.5" fill="#2aa9bd"/>
+<text x="28.0" y="110.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11.5" fill="#1a4f7a" font-weight="bold" letter-spacing="1.6">TEAM OF AGENTS</text>
+<text x="1064.0" y="110.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11.5" fill="#1a4f7a" font-weight="bold" letter-spacing="1.6">TEAM OF HUMANS</text>
+<rect x="406.0" y="96.0" width="152.0" height="21.0" rx="3" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.2"/>
+<text x="482.0" y="111.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10" fill="#14532d" text-anchor="middle">Built and running</text>
+<rect x="566.0" y="96.0" width="152.0" height="21.0" rx="3" fill="#fdf3e6" stroke="#d98324" stroke-width="1.2"/>
+<text x="642.0" y="111.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10" fill="#7c4a03" text-anchor="middle">Partly built</text>
+<rect x="726.0" y="96.0" width="152.0" height="21.0" rx="3" fill="#eef3fa" stroke="#7f9fc4" stroke-width="1.2"/>
+<text x="802.0" y="111.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10" fill="#1e3a5f" text-anchor="middle">Not built yet</text>
+<rect x="886.0" y="96.0" width="152.0" height="21.0" rx="3" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="962.0" y="111.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10" fill="#3f4855" text-anchor="middle">In RAG Core, not wired</text>
+<rect x="383.0" y="130.0" width="300.0" height="64.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="533.0" y="150.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">Orchestrator</text>
+<text x="533.0" y="166.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">app/agents/pipeline.py — classify, retrieve,</text>
+<text x="533.0" y="179.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">decide, in order</text>
+<line x1="533.0" y1="194.0" x2="533.0" y2="210.0" stroke="#5b6673" stroke-width="1"/>
+<rect x="28" y="246.0" width="1010" height="166.0" rx="6" fill="#f8fafc" stroke="#dde4ec" stroke-width="1"/>
+<text x="28.0" y="239.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">Capability agents — db/seeds/001_agents.sql</text>
+<rect x="42.0" y="260.0" width="238.0" height="64.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="161.0" y="280.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">Incident Intake Agent</text>
+<text x="161.0" y="296.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">parses inbound payloads into an</text>
+<text x="161.0" y="309.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">incident</text>
+<rect x="290.0" y="260.0" width="238.0" height="64.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="409.0" y="280.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">Classification Agent</text>
+<text x="409.0" y="296.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">category, priority, service,</text>
+<text x="409.0" y="309.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">environment</text>
+<rect x="538.0" y="260.0" width="238.0" height="64.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="657.0" y="280.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">RAG Retrieval Agent</text>
+<text x="657.0" y="296.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">similar incidents, runbooks,</text>
+<text x="657.0" y="309.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">postmortems</text>
+<rect x="786.0" y="260.0" width="238.0" height="64.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="905.0" y="280.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">Decision Agent</text>
+<text x="905.0" y="296.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">decides if it is known, proposes</text>
+<text x="905.0" y="309.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">actions</text>
+<rect x="42.0" y="334.0" width="238.0" height="64.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="161.0" y="360.8" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">Execution Agent</text>
+<text x="161.0" y="376.8" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">runs an approved action through a tool</text>
+<rect x="290.0" y="334.0" width="238.0" height="64.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="409.0" y="354.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">Knowledge Generation Agent</text>
+<text x="409.0" y="370.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">turns a resolved incident into a</text>
+<text x="409.0" y="383.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">document</text>
+<rect x="538.0" y="334.0" width="238.0" height="64.0" rx="4" fill="#fdf3e6" stroke="#d98324" stroke-width="1.4"/>
+<text x="657.0" y="354.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#7c4a03" font-weight="bold" text-anchor="middle">Change Delivery Agent</text>
+<text x="657.0" y="370.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">applies the patch and commits —</text>
+<text x="657.0" y="383.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">pushing off by default</text>
+<rect x="786.0" y="334.0" width="238.0" height="64.0" rx="4" fill="#eef3fa" stroke="#7f9fc4" stroke-width="1.4"/>
+<text x="905.0" y="354.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#1e3a5f" font-weight="bold" text-anchor="middle">Validation Agent</text>
+<text x="905.0" y="370.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">seeded in the registry, no module —</text>
+<text x="905.0" y="383.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">why the funnel ends early</text>
+<rect x="28" y="448.0" width="1010" height="321.0" rx="6" fill="#f8fafc" stroke="#dde4ec" stroke-width="1"/>
+<text x="28.0" y="441.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">Tool agents</text>
+<text x="42.0" y="471.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#8b95a3">Execution tools — app/tools/__init__.py</text>
+<rect x="42.0" y="479.0" width="320.7" height="51.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="202.3" y="499.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">API tool</text>
+<text x="202.3" y="515.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">HttpTool — action_type API</text>
+<rect x="372.7" y="479.0" width="320.7" height="51.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="533.0" y="499.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">Webhook tool</text>
+<text x="533.0" y="515.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">HttpTool — action_type WEBHOOK</text>
+<rect x="703.3" y="479.0" width="320.7" height="51.0" rx="4" fill="#fdf3e6" stroke="#d98324" stroke-width="1.4"/>
+<text x="863.7" y="499.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#7c4a03" font-weight="bold" text-anchor="middle">GitHub branch push</text>
+<text x="863.7" y="515.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">handled by Change Delivery, not the registry</text>
+<rect x="42.0" y="540.0" width="320.7" height="51.0" rx="4" fill="#eef3fa" stroke="#7f9fc4" stroke-width="1.4"/>
+<text x="202.3" y="560.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#1e3a5f" font-weight="bold" text-anchor="middle">SQL tool</text>
+<text x="202.3" y="576.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">in the vocabulary, no executor registered</text>
+<rect x="372.7" y="540.0" width="320.7" height="51.0" rx="4" fill="#eef3fa" stroke="#7f9fc4" stroke-width="1.4"/>
+<text x="533.0" y="560.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#1e3a5f" font-weight="bold" text-anchor="middle">Lambda tool</text>
+<text x="533.0" y="576.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">in the vocabulary, no executor registered</text>
+<rect x="703.3" y="540.0" width="320.7" height="51.0" rx="4" fill="#eef3fa" stroke="#7f9fc4" stroke-width="1.4"/>
+<text x="863.7" y="560.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#1e3a5f" font-weight="bold" text-anchor="middle">Kubernetes tool</text>
+<text x="863.7" y="576.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">in the vocabulary, no executor registered</text>
+<line x1="42.0" y1="603.0" x2="1024.0" y2="603.0" stroke="#dde4ec" stroke-width="1"/>
+<text x="42.0" y="622.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#8b95a3">RAG Core tools — we call five of the seven</text>
+<rect x="42.0" y="630.0" width="238.0" height="51.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="161.0" y="650.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">rag_search</text>
+<text x="161.0" y="666.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">raw passages with scores</text>
+<rect x="290.0" y="630.0" width="238.0" height="51.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="409.0" y="650.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">rag_answer</text>
+<text x="409.0" y="666.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">grounded answer with citations</text>
+<rect x="538.0" y="630.0" width="238.0" height="51.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="657.0" y="650.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">rag_ingest</text>
+<text x="657.0" y="666.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">writes what we learned back</text>
+<rect x="786.0" y="630.0" width="238.0" height="51.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="905.0" y="650.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">rag_feedback</text>
+<text x="905.0" y="666.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">rates a passage, feeds ranking</text>
+<rect x="42.0" y="691.0" width="238.0" height="64.0" rx="4" fill="#eaf6f0" stroke="#2f8f6b" stroke-width="1.4"/>
+<text x="161.0" y="717.8" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#14532d" font-weight="bold" text-anchor="middle">rag_list_collections</text>
+<text x="161.0" y="733.8" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">how the corpus is organised</text>
+<rect x="290.0" y="691.0" width="238.0" height="64.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="409.0" y="711.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#3f4855" font-weight="bold" text-anchor="middle">rag_pin_trace</text>
+<text x="409.0" y="727.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">keeps a trace past retention — a PR's</text>
+<text x="409.0" y="740.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">evidence 404s without it</text>
+<rect x="538.0" y="691.0" width="238.0" height="64.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="657.0" y="711.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#3f4855" font-weight="bold" text-anchor="middle">rag_incident_traces</text>
+<text x="657.0" y="727.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">replays what was already asked,</text>
+<text x="657.0" y="740.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle">including the gaps</text>
+<rect x="28" y="805.0" width="1010" height="213.0" rx="6" fill="#f8fafc" stroke="#dde4ec" stroke-width="1"/>
+<text x="28.0" y="798.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">Data sources</text>
+<text x="42.0" y="828.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#8b95a3">Connected</text>
+<rect x="42.0" y="836.0" width="320.7" height="79.0" rx="4" fill="#1e3a5f" stroke="#12263f" stroke-width="1.4"/>
+<text x="202.3" y="870.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#ffffff" font-weight="bold" text-anchor="middle">incident_response</text>
+<text x="202.3" y="886.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#ffffff" text-anchor="middle">PostgreSQL 17 — incidents, actions, executions, runs</text>
+<rect x="372.7" y="836.0" width="320.7" height="79.0" rx="4" fill="#1e3a5f" stroke="#12263f" stroke-width="1.4"/>
+<text x="533.0" y="870.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#ffffff" font-weight="bold" text-anchor="middle">rag</text>
+<text x="533.0" y="886.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#ffffff" text-anchor="middle">PostgreSQL 17 + pgvector — the only vector store</text>
+<rect x="703.3" y="836.0" width="320.7" height="79.0" rx="4" fill="#1e3a5f" stroke="#12263f" stroke-width="1.4"/>
+<text x="863.7" y="856.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#ffffff" font-weight="bold" text-anchor="middle">knowledge_documents → collection</text>
+<text x="863.7" y="871.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12.5" fill="#ffffff" font-weight="bold" text-anchor="middle">'incidents'</text>
+<text x="863.7" y="887.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#ffffff" text-anchor="middle">app/corpus.py — today the only thing feeding the</text>
+<text x="863.7" y="900.2" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#ffffff" text-anchor="middle">corpus</text>
+<line x1="42.0" y1="927.0" x2="1024.0" y2="927.0" stroke="#dde4ec" stroke-width="1"/>
+<text x="42.0" y="946.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#8b95a3">Registered connectors in RAG Core — none configured</text>
+<rect x="42.0" y="954.0" width="114.0" height="50.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="99.0" y="980.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">Slack</text>
+<rect x="166.0" y="954.0" width="114.0" height="50.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="223.0" y="980.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">Jira</text>
+<rect x="290.0" y="954.0" width="114.0" height="50.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="347.0" y="980.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">Confluence</text>
+<rect x="414.0" y="954.0" width="114.0" height="50.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="471.0" y="973.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">AWS CloudWatch</text>
+<text x="471.0" y="988.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">Logs</text>
+<rect x="538.0" y="954.0" width="114.0" height="50.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="595.0" y="980.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">Git repository</text>
+<rect x="662.0" y="954.0" width="114.0" height="50.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="719.0" y="980.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">Filesystem</text>
+<rect x="786.0" y="954.0" width="114.0" height="50.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="843.0" y="980.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">HTTP JSON</text>
+<rect x="910.0" y="954.0" width="114.0" height="50.0" rx="4" fill="#f4f6f9" stroke="#8b93a1" stroke-width="1.4" stroke-dasharray="5 3"/>
+<text x="967.0" y="980.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#3f4855" font-weight="bold" text-anchor="middle">MCP server</text>
+<rect x="1064.0" y="130.0" width="348.0" height="84.0" rx="5" fill="#f4f8fc" stroke="#dde4ec" stroke-width="1"/>
+<rect x="1064.0" y="130.0" width="4.0" height="84.0" rx="2" fill="#2aa9bd"/>
+<text x="1082.0" y="156.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="15.5" fill="#1a4f7a" font-weight="bold">On-call engineer</text>
+<text x="1082.0" y="174.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">Triage the open queue, approve or reject what the</text>
+<text x="1082.0" y="188.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">agents propose, inspect what they did.</text>
+<rect x="1082.0" y="198.0" width="28.8" height="17.0" rx="3" fill="#e6eef7" stroke="#b7c9dd" stroke-width="1"/>
+<text x="1086.0" y="210.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10" fill="#1a4f7a" font-weight="bold">Now</text>
+<rect x="1064.0" y="226.0" width="348.0" height="84.0" rx="5" fill="#f4f8fc" stroke="#dde4ec" stroke-width="1"/>
+<rect x="1064.0" y="226.0" width="4.0" height="84.0" rx="2" fill="#2aa9bd"/>
+<text x="1082.0" y="252.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="15.5" fill="#1a4f7a" font-weight="bold">Eng manager / SRE lead</text>
+<text x="1082.0" y="270.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">Judge whether the automation can be trusted, and</text>
+<text x="1082.0" y="284.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">where incidents concentrate.</text>
+<rect x="1082.0" y="294.0" width="81.6" height="17.0" rx="3" fill="#e6eef7" stroke="#b7c9dd" stroke-width="1"/>
+<text x="1086.0" y="306.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10" fill="#1a4f7a" font-weight="bold">Performance</text>
+<rect x="1064.0" y="322.0" width="348.0" height="84.0" rx="5" fill="#f4f8fc" stroke="#dde4ec" stroke-width="1"/>
+<rect x="1064.0" y="322.0" width="4.0" height="84.0" rx="2" fill="#2aa9bd"/>
+<text x="1082.0" y="348.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="15.5" fill="#1a4f7a" font-weight="bold">Runbook owner</text>
+<text x="1082.0" y="366.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">Find which services the knowledge base cannot</text>
+<text x="1082.0" y="380.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#5b6673">help with yet.</text>
+<rect x="1082.0" y="390.0" width="68.4" height="17.0" rx="3" fill="#e6eef7" stroke="#b7c9dd" stroke-width="1"/>
+<text x="1086.0" y="402.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10" fill="#1a4f7a" font-weight="bold">Knowledge</text>
+<rect x="1064.0" y="426.0" width="348.0" height="117.0" rx="5" fill="#fdf9ef" stroke="#e3d3ad" stroke-width="1" stroke-dasharray="5 3"/>
+<text x="1080.0" y="447.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="9.5" fill="#8a6d1f" font-weight="bold" letter-spacing="1.2">NOT USED — WORTH A DECISION</text>
+<text x="1080.0" y="465.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#6b5a2e">RAG Core also ships a CrewAI crew — Triage,</text>
+<text x="1080.0" y="479.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#6b5a2e">Investigator, Remediation — that overlaps this</text>
+<text x="1080.0" y="494.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#6b5a2e">pipeline. We do not use it: our orchestrator calls</text>
+<text x="1080.0" y="508.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#6b5a2e">the API directly, so the confidence gate and the</text>
+<text x="1080.0" y="523.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#6b5a2e">groundedness judge still apply. Worth a decision,</text>
+<text x="1080.0" y="537.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="11" fill="#6b5a2e">not a default.</text>
+<text x="1064.0" y="565.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="9.5" fill="#1a4f7a" font-weight="bold" letter-spacing="1.2">WHAT THE COLOURS ARE POINTING AT</text>
+<rect x="1064.0" y="579.0" width="348.0" height="94.0" rx="5" fill="#f8fafc" stroke="#dde4ec" stroke-width="1"/>
+<text x="1076.0" y="604.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="17" fill="#c3ced9" font-weight="bold">1</text>
+<text x="1096.0" y="603.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12" fill="#1a4f7a" font-weight="bold">Pin the trace when a branch is pushed</text>
+<text x="1096.0" y="619.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">rag_pin_trace is already there. Without it the</text>
+<text x="1096.0" y="632.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">evidence behind a merged PR 404s once the retention</text>
+<text x="1096.0" y="646.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">window passes — exactly when someone audits the</text>
+<text x="1096.0" y="659.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">decision.</text>
+<rect x="1064.0" y="681.0" width="348.0" height="80.5" rx="5" fill="#f8fafc" stroke="#dde4ec" stroke-width="1"/>
+<text x="1076.0" y="706.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="17" fill="#c3ced9" font-weight="bold">2</text>
+<text x="1096.0" y="705.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12" fill="#1a4f7a" font-weight="bold">Point one connector at something real</text>
+<text x="1096.0" y="721.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">Eight are registered and none configured, so the</text>
+<text x="1096.0" y="734.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">corpus can only ever contain what we wrote back into</text>
+<text x="1096.0" y="748.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">it ourselves.</text>
+<rect x="1064.0" y="769.5" width="348.0" height="94.5" rx="5" fill="#f8fafc" stroke="#dde4ec" stroke-width="1"/>
+<text x="1076.0" y="794.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="17" fill="#c3ced9" font-weight="bold">3</text>
+<text x="1096.0" y="793.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12" fill="#1a4f7a" font-weight="bold">Implement the Validation Agent, or unseed</text>
+<text x="1096.0" y="807.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="12" fill="#1a4f7a" font-weight="bold">it</text>
+<text x="1096.0" y="823.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">It is in the registry, so the funnel reserves a stage</text>
+<text x="1096.0" y="837.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">for it and reports “Not yet available” rather than a</text>
+<text x="1096.0" y="850.5" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673">number.</text>
+<line x1="28.0" y1="1044.0" x2="1412.0" y2="1044.0" stroke="#dde4ec" stroke-width="1"/>
+<text x="28.0" y="1064.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#8b95a3" font-weight="bold">CR-INC-Backend  ·  Incident-tracker-ui  ·  hackaton (RAG Core)</text>
+<text x="1412.0" y="1064.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#8b95a3" font-weight="bold" text-anchor="end">Nothing runs that a person did not approve</text>
+<text x="720.0" y="1082.0" font-family="DejaVu Sans, Verdana, Geneva, sans-serif" font-size="10.5" fill="#5b6673" text-anchor="middle" font-style="italic">A rejection is not discarded — it goes back to RAG Core as a rating, so the sources behind a bad recommendation rank lower next time</text>
+</svg>

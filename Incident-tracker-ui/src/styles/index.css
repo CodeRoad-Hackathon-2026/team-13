@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+/*
+ * shadcn's primitives ship `dark:` classes. Tailwind v4's built-in `dark` variant is
+ * prefers-color-scheme, so without this declaration those classes activate for anyone whose OS is
+ * in dark mode — silently painting dark surfaces into a light-only app. Binding the variant to a
+ * `.dark` ancestor that is never rendered keeps the app light for everyone, per the design.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens for the "Incident Orchestrator" operator console — a cool-slate, indigo-accented
+ * system that replaces the earlier warm-neutral/near-black canvas. The prior system kept
+ * `--background` and `--muted` at nearly the same lightness, so cards barely separated from the
+ * page; this pass widens that gap and gives the app one deliberate brand hue (indigo) carried by
+ * the primary action, the active nav state, focus rings and selection — rather than leaving every
+ * interactive surface in near-black/white.
+ *
+ * The PRD-bound hues (priority P1..P4, execution outcome incl. ROLLED_BACK) keep their semantic
+ * role — red/amber/blue/gray and a distinct violet for rollback — those carry requirements, not
+ * taste, only the exact values were tuned for stronger contrast.
+ *
+ * Light theme only: research.md pins the target to desktop browsers at a fixed ~1360px operator
+ * layout. No dark mode and no breakpoints are specified anywhere in the PRD, so none are invented.
+ */
+
+:root {
+  /* --- surfaces & text: cool slate, layered so cards visibly sit above the page ---
+     `--background` is a genuine step below `--card` (not a near-identical warm grey), so the app
+     chrome, KPI cards and panels read as raised surfaces instead of dissolving into the canvas. */
+  --background: #e9edf4;
+  --foreground: #0f1424;
+  --card: #ffffff;
+  --card-foreground: #0f1424;
+  --popover: #ffffff;
+  --popover-foreground: #0f1424;
+  /* A secondary surface *inside* white cards (table header stripe, code blocks, the approval
+     card's footer) — lighter than `--background`, still a hair off pure white. */
+  --muted: #f2f4f9;
+  --muted-foreground: #565f70;
+  --subtle-foreground: #8991a3;
+  --border: #dde2eb;
+  --border-soft: #e7eaf1;
+  --input: #d7dce7;
+
+  /* --- brand / interaction: one indigo carried by Approve, the active tab, selection and focus --- */
+  --primary: #4338ca;
+  --primary-hover: #372aa8;
+  --primary-foreground: #ffffff;
+  --secondary: #eef1f6;
+  --secondary-foreground: #3d4457;
+  --accent: #eceeff;
+  --accent-foreground: #312e81;
+  --ring: #6366f1;
+
+  /* Selection tint used by anything marking "this is the thing currently filtering the view"
+     (active KPI tile, selected header control) — the brand hue at low opacity, not a grey swap. */
+  --selected-bg: #eceeff;
+  --selected-ring: var(--ring);
+
+  /* --- incident priority (PRD-bound) ---
+   * P1 is red-700 rather than red-600: against --p2's amber the lighter red sat at ΔE 14.4 for
+   * normal vision, under the 15 floor where a pair stops being reliably separable. Darkening it
+   * also reads as more severe, which is the direction P1 wants anyway.
+   *
+   * --p4 stays a low-chroma grey on purpose, and is the one slot that fails a categorical chroma
+   * floor. That is correct here: "lowest priority" is the absence of alarm, and every place it
+   * appears is a pill carrying the literal text "P4", so identity is never colour-alone. */
+  --p1: #b91c1c;
+  --p2: #d97706;
+  --p3: #2563eb;
+  --p4: #64748b;
+
+  /*
+   * Execution outcome. `--roll` is deliberately its own hue: EO-1 requires ROLLED_BACK to read as
+   * its own bucket everywhere — never folded into success (--ok) or failure (--bad).
+   *
+   * --run exists because RUNNING used to borrow --p3. That put two of the four outcome colours at
+   * ΔE 0.4 under deuteranopia — indistinguishable — so the rule protecting ROLLED_BACK from --ok
+   * and --bad was guarding the wrong collision. Cyan clears every pair.
+   *
+   * --ok and --bad are red/green, which no hue choice can separate under deuteranopia: both
+   * collapse toward yellow. Lightness is the only channel left, which is why --bad is the darker
+   * red-700 — that alone takes the pair from ΔE 5.0 to 11.0. The badges carry text regardless.
+   */
+  --ok: #16a34a;
+  /* amber-800 rather than amber-700. On --chip-warn-bg the lighter value gave
+   * 4.44:1, six hundredths under the 4.5 AA threshold for body text — and that
+   * pair is what every MEDIUM RISK badge in the app is made of, so it failed
+   * everywhere and not only here. 4.92:1 now, at a darkening nobody can see. */
+  --warn: #a94e08;
+  --bad: #b91c1c;
+  --roll: #7c3aed;
+  --run: #0891b2;
+
+  /*
+   * Chart series, assigned in fixed order and never cycled. Separate from the status tokens above
+   * because a series carries identity, not judgement: known vs unknown incidents were painted
+   * --ok green and --bad red, which said "unknown is bad" when it only means "not classified yet"
+   * — and did it with the single worst pair for colour vision deficiency.
+   */
+  --chart-1: #4f46e5;
+  --chart-2: #ea580c;
+
+  /* Magnitude is drawn in ink. Not quite --foreground: a solid bar at full text contrast is
+   * heavier than the label above it, and the bar is the subordinate half of that pair. */
+  --chart-ink: #1f2433;
+  /* The same bar for a row that represents an absence — uncategorised, unknown, not yet run. */
+  --chart-ink-muted: #b9bfcd;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  /* Chip fills — tinted surfaces for pills/badges and the alert strip's severity states. Kept
+     saturated enough to read as a real status colour, not a hint of one. */
+  --chip-bad-bg: #fde3e3;
+  --chip-warn-bg: #fdf0d5;
+  --chip-ok-bg: #ddf5e4;
+  --chip-info-bg: #dfe9fd;
+
+  --radius: 0.75rem;
+
+  /* Base tint for the elevation scale below, as a plain RGB triplet (cool navy, not warm) so it
+     can be referenced without a self-referencing custom property. */
+  --shadow-color: 15 20 36;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-input: var(--input);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-selected-bg: var(--selected-bg);
+  --color-selected-ring: var(--selected-ring);
+
+  --color-p1: var(--p1);
+  --color-p2: var(--p2);
+  --color-p3: var(--p3);
+  --color-p4: var(--p4);
+
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-roll: var(--roll);
+  --color-run: var(--run);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-ink: var(--chart-ink);
+  --color-chart-ink-muted: var(--chart-ink-muted);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-chip-bad-bg: var(--chip-bad-bg);
+  --color-chip-warn-bg: var(--chip-warn-bg);
+  --color-chip-ok-bg: var(--chip-ok-bg);
+  --color-chip-info-bg: var(--chip-info-bg);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Elevation scale under Tailwind's theme namespace, so plain `shadow-xs`/`shadow-sm`/etc.
+     utilities resolve to this cool-tinted ramp everywhere. Slightly more present than a barely-
+     there shadow — this is the one shadow language in the app, carrying the surface hierarchy. */
+  --shadow-2xs: 0 1px 1px 0 rgb(var(--shadow-color) / 0.04);
+  --shadow-xs: 0 1px 2px 0 rgb(var(--shadow-color) / 0.06);
+  --shadow-sm: 0 1px 3px -1px rgb(var(--shadow-color) / 0.08), 0 2px 4px 0 rgb(var(--shadow-color) / 0.06);
+  --shadow-md: 0 4px 6px -2px rgb(var(--shadow-color) / 0.07), 0 8px 14px -2px rgb(var(--shadow-color) / 0.10);
+  --shadow-lg: 0 8px 12px -4px rgb(var(--shadow-color) / 0.08), 0 18px 30px -8px rgb(var(--shadow-color) / 0.14);
+  --shadow-xl: 0 12px 20px -8px rgb(var(--shadow-color) / 0.10), 0 26px 50px -12px rgb(var(--shadow-color) / 0.18);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    /* 14px base — every `text-*` utility below is sized against it. */
+    font-size: 14px;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+   * A11Y-2: a single, always-visible focus ring. Applied globally rather than per-component so no
+   * interactive element can ship without one.
+   */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* X-6/A11Y-6: honour reduced-motion for every transition and the strip's live pulse. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Thin, low-contrast scrollbars — a small detail that keeps the chrome as quiet as the rest of
+     the design instead of the OS's default heavy bars. Webkit-only; Firefox falls back to its
+     own thin scrollbar via `scrollbar-width` below. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 999px;
+    border: 2px solid var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--subtle-foreground);
+  }
+}
+
+/* ---- design-system utilities ---------------------------------------------------------- */
+
+@utility eyebrow {
+  /* The design's small uppercase label: KPI names, "CONFIDENCE", section eyebrows. */
+  font-size: 0.786rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--subtle-foreground);
+}
+
+@utility meta {
+  /* Every metadatum and number in the design is mono and muted. */
+  font-family: var(--font-mono);
+  font-size: 0.857rem;
+  color: var(--subtle-foreground);
+}
+
+@utility brand-mark {
+  /* The one deliberate gradient in the app — confined to the header's product glyph, never
+     reused elsewhere, so it reads as a mark rather than a texture applied throughout the UI. */
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+}

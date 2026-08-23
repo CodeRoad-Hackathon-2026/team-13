@@ -1,0 +1,135 @@
+{
+  "name": "incident-response-v1",
+  "description": "Golden questions for the seeded incident corpus. Each answerable case names the documents that must be retrieved; each unanswerable case must produce an abstention rather than a plausible-sounding answer.",
+  "cases": [
+    {
+      "id": "pool-before-scaling",
+      "query": "The API is timing out during checkout. Should I scale it up?",
+      "relevant": [
+        "runbook/payments-timeout",
+        "INC-2481"
+      ],
+      "must_mention": [
+        "cl_waiting",
+        "pgbouncer"
+      ],
+      "note": "The trap: the obvious action (scale the API) is the wrong one. INC-2481 is 42 minutes of evidence that it does not help."
+    },
+    {
+      "id": "err-upstream-timeout",
+      "query": "ERR_UPSTREAM_TIMEOUT on payments-api",
+      "relevant": [
+        "runbook/payments-timeout",
+        "INC-2481"
+      ],
+      "must_mention": [
+        "cl_waiting"
+      ],
+      "note": "Exact error code — the lexical branch should carry this one even if embeddings miss it."
+    },
+    {
+      "id": "kafka-lag-fix",
+      "query": "Consumer group lag is growing but there are no errors in the logs. What do I do?",
+      "relevant": [
+        "runbook/kafka-lag",
+        "INC-2510"
+      ],
+      "must_mention": [
+        [
+          "rollout restart",
+          "restart the consumer",
+          "restart the indexer"
+        ]
+      ],
+      "note": "Symptom stated without naming Kafka; tests semantic retrieval rather than keyword overlap."
+    },
+    {
+      "id": "stale-search",
+      "query": "Products updated hours ago are still missing from search results",
+      "relevant": [
+        "INC-2510"
+      ],
+      "must_mention": [
+        "restart",
+        [
+          "indexer",
+          "consumer"
+        ]
+      ],
+      "note": "Paraphrase of the INC-2510 symptom section. The required fact is the action, not a particular noun: the model alternates between naming the indexer and naming the consumer group, and both are correct."
+    },
+    {
+      "id": "rollback-threshold",
+      "query": "How long do I wait before rolling back a bad deploy?",
+      "relevant": [
+        "runbook/rollback"
+      ],
+      "must_mention": [
+        "2%",
+        "5 minutes"
+      ],
+      "note": "The answer is a specific threshold. A model that paraphrases loses it, which is what must_mention catches."
+    },
+    {
+      "id": "redis-memory",
+      "query": "Cache hit rate is dropping and evicted_keys is climbing",
+      "relevant": [
+        "redis-evictions.md"
+      ],
+      "must_mention": [
+        "maxmemory"
+      ],
+      "note": "Also checks the negative instruction survives — the runbook forbids FLUSHALL."
+    },
+    {
+      "id": "redis-flushall-warning",
+      "query": "Can I run FLUSHALL to free up Redis memory during an incident?",
+      "relevant": [
+        "redis-evictions.md"
+      ],
+      "must_mention": [
+        "not"
+      ],
+      "note": "A prohibition. Retrieval that returns the document but generation that inverts the advice is the failure being tested."
+    },
+    {
+      "id": "orders-schema",
+      "query": "What columns does the orders table have?",
+      "relevant": [
+        "migrations/001_orders.sql"
+      ],
+      "collections": [
+        "code"
+      ],
+      "note": "SQL corpus, and a collection-scoped query."
+    },
+    {
+      "id": "oov-kubernetes-version",
+      "query": "Which Kubernetes version is our production cluster running?",
+      "relevant": [],
+      "should_abstain": true,
+      "note": "Plausible, on-topic, and absent from the corpus. This is the case a RAG without an abstention gate answers confidently and wrongly."
+    },
+    {
+      "id": "oov-oncall-rota",
+      "query": "Who is on call for the payments team this weekend?",
+      "relevant": [],
+      "should_abstain": true,
+      "note": "Names a service that IS in the corpus, so retrieval will return something. The confidence gate has to reject it anyway."
+    },
+    {
+      "id": "oov-unrelated",
+      "query": "What is the capital of Portugal?",
+      "relevant": [],
+      "should_abstain": true,
+      "note": "Completely unrelated. If this is not abstained, the threshold is broken, not merely miscalibrated."
+    },
+    {
+      "id": "oov-invented-incident",
+      "query": "What was the root cause of INC-9999?",
+      "relevant": [],
+      "should_abstain": true,
+      "note": "Looks exactly like a corpus document id. Tests that lexical similarity to the id format does not manufacture confidence."
+    }
+  ]
+}

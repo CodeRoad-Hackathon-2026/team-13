@@ -1,3 +1,23 @@
-.claude/*
+# Claude Code's own tooling, and the ui-ux skill's ~4.6 MB of bundled font and
+# icon data. Not project code, and it was already excluded here before the three
+# repos were flattened into folders.
+.claude/
 
-.specify/*
+# .specify/ is deliberately NOT ignored, unlike before: it holds
+# Incident-tracker-ui/.specify/memory/constitution.md, which that project's own
+# README and CLAUDE.md both point at as the binding rules. An ignored file that
+# two documents reference is a broken link.
+
+# Local environment and build output. Every one of these is already ignored
+# inside its own project; repeated here so a fresh clone cannot commit one.
+.env
+.env.local
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+playwright-report/
+test-results/
+.DS_Store

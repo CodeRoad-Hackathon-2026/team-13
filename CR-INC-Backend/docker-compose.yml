@@ -1,0 +1,130 @@
+# The whole system: dashboard, orchestrator, and RAG Core.
+#
+# Expects the three repositories side by side:
+#
+#   dev/coderoad/
+#     ├── CR-INC-Backend      (here)
+#     ├── Incident-tracker-ui
+#     └── rag-core            (RAG Core)
+#
+#   cp .env.example .env      # set ANTHROPIC_API_KEY / VOYAGE_API_KEY
+#   docker compose up --build
+#   open http://localhost:8900
+name: incident-orchestrator
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: incident
+      POSTGRES_PASSWORD: incident
+      POSTGRES_DB: incident_response
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Runs once, on an empty volume, to add RAG Core's database.
+      - ./deploy/postgres-init.sql:/docker-entrypoint-initdb.d/10-databases.sql:ro,z
+    ports:
+      - "${POSTGRES_PORT:-8903}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U incident -d incident_response"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # --------------------------------------------------------------- RAG Core
+  rag-api:
+    build: ../rag-core
+    env_file:
+      # RAG Core's own provider credentials, read where they already live rather
+      # than copied into this repo. Optional: without it the service starts but
+      # cannot embed or answer.
+      - path: ../rag-core/.env
+        required: false
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://incident:incident@postgres:5432/rag
+      REDIS_URL: redis://redis:6379/0
+      # Registered with admin scope on first boot. The orchestrator authenticates
+      # with this same value — one key for the stack, and it never reaches a
+      # browser because only the orchestrator talks to the RAG.
+      BOOTSTRAP_API_KEY: ${RAG_API_KEY}
+    ports:
+      - "${RAG_PORT:-8902}:8000"
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+
+  rag-worker:
+    build: ../rag-core
+    command: arq app.worker.WorkerSettings
+    env_file:
+      - path: ../rag-core/.env
+        required: false
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://incident:incident@postgres:5432/rag
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+
+  # ---------------------------------------------------------- orchestrator
+  # One-shot: applies migrations and seeds, then exits. The API waits for it to
+  # succeed, so the first request cannot race an unmigrated schema.
+  migrate:
+    build: .
+    command: ./db/migrate.sh --seed
+    environment:
+      DATABASE_URL: postgresql://incident:incident@postgres:5432/incident_response
+    depends_on:
+      postgres: {condition: service_healthy}
+    restart: "no"
+
+  orchestrator:
+    build: .
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://incident:incident@postgres:5432/incident_response
+      RAG_API_URL: http://rag-api:8000/v1
+      RAG_API_KEY: ${RAG_API_KEY}
+      CORS_ORIGINS: '${CORS_ORIGINS:-["http://localhost:8900"]}'
+      CHANGE_DELIVERY_ALLOWED_REPOS: ${CHANGE_DELIVERY_ALLOWED_REPOS:-[]}
+      CHANGE_DELIVERY_PUSH_ENABLED: ${CHANGE_DELIVERY_PUSH_ENABLED:-false}
+    volumes:
+      # The deploy key, read-only. Defaults to a file that does not exist, so the
+      # stack comes up without one and delivery simply stays in dry run.
+      - ${CHANGE_DELIVERY_SSH_KEY:-./deploy/github_known_hosts}:/run/secrets/deploy_key:ro,z
+      # Checkouts on a named volume, not /tmp — images often mount that as a
+      # small tmpfs and a clone is not small.
+      - checkouts:/var/tmp/change-delivery
+    ports:
+      - "${ORCHESTRATOR_PORT:-8901}:8001"
+    depends_on:
+      postgres: {condition: service_healthy}
+      migrate: {condition: service_completed_successfully}
+
+  # -------------------------------------------------------------- dashboard
+  # nginx serves the built SPA and proxies /api to the orchestrator, so the
+  # browser sees a single origin and never learns the RAG exists.
+  frontend:
+    build: ../Incident-tracker-ui
+    ports:
+      - "${FRONTEND_PORT:-8900}:80"
+    depends_on:
+      - orchestrator
+
+volumes:
+  pgdata:
+  checkouts:
