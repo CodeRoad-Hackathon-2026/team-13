@@ -1,3 +1,6 @@
 [submodule "rag-core"]
 	path = rag-core
 	url = https://github.com/Undes-core/rag-core
+[submodule "Incident-tracker-ui"]
+	path = Incident-tracker-ui
+	url = https://github.com/Undes-core/Incident-tracker-ui
